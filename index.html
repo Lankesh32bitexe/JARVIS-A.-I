@@ -108,12 +108,20 @@
     const noBtn=document.querySelector(".js-no-btn");
     const heartLoader=document.querySelector(".cssload-main");
 
-    // No button moves randomly
-    noBtn.addEventListener("mouseenter",()=>{
-      noBtn.style.position="absolute";
-      noBtn.style.left=Math.random()*200+"px";
-      noBtn.style.top=Math.random()*100+"px";
-    });
+    // No button moves randomly anywhere on screen
+    function moveNoBtn() {
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+    noBtn.addEventListener("click", moveNoBtn);
+    noBtn.addEventListener("touchstart", moveNoBtn); // mobile ke liye
 
     // Yes button shows loader then result
     yesBtn.addEventListener("click",()=>{
